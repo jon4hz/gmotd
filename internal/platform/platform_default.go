@@ -3,6 +3,8 @@
 
 package platform
 
-func PrettyName() string {
-	return defaultPrettyName()
+import "context"
+
+func PrettyName(ctx context.Context) string {
+	return defaultPrettyName(ctx)
 }

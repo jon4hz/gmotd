@@ -14,7 +14,7 @@ type Pipe struct{}
 func (Pipe) String() string { return "uptime" }
 
 func (Pipe) Gather(c *context.Context) error {
-	t, err := host.BootTime()
+	t, err := host.BootTimeWithContext(c)
 	if err != nil {
 		return fmt.Errorf("failed to get uptime: %w", err)
 	}

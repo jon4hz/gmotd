@@ -14,6 +14,7 @@ import (
 
 func main() {
 	ctx := context.New()
+	defer ctx.Cancel()
 
 	w, h, err := term.GetSize(int(os.Stdout.Fd()))
 	if err != nil {

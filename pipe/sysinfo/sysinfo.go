@@ -17,12 +17,12 @@ type Pipe struct{}
 func (Pipe) String() string { return "sysinfo" }
 
 func (Pipe) Gather(c *context.Context) error {
-	s, err := host.Info()
+	s, err := host.InfoWithContext(c)
 	if err != nil {
 		return fmt.Errorf("failed to get host info: %w", err)
 	}
 
-	cpu, err := cpu.Info()
+	cpu, err := cpu.InfoWithContext(c)
 	if err != nil {
 		return fmt.Errorf("failed to get cpu info: %w", err)
 	}
@@ -34,7 +34,7 @@ func (Pipe) Gather(c *context.Context) error {
 
 	c.Sysinfo = &context.Sysinfo{
 		Uptime:   time.Since(time.Unix(int64(s.BootTime), 0)),
-		Platform: platform.PrettyName(),
+		Platform: platform.PrettyName(c),
 		Kernel:   s.KernelVersion,
 		CPU:      cpuName,
 	}
