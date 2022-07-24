@@ -15,7 +15,7 @@ type Context struct {
 	Runtime  *Runtime
 	Hostname *Hostname
 	Uptime   *Uptime
-	Sysinfo  *Sysinfo
+	Sysinfo  *SysInfo
 }
 
 type Runtime struct {
@@ -43,9 +43,14 @@ type Uptime struct {
 	Uptime time.Duration
 }
 
-type Sysinfo struct {
+type SysInfo struct {
 	Uptime   time.Duration
 	Platform string
 	Kernel   string
 	CPU      string
+	Load     *LoadInfo
+}
+
+type LoadInfo struct {
+	Load1, Load5, Load15 float64
 }
