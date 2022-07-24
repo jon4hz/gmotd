@@ -49,11 +49,11 @@ func (Pipe) Message(c *context.Context) string {
 		}
 	}
 
-	f, err = figletlib.GetFontByName(c.Config.Hostname.FigletFontDir, "standard")
+	f, err = figletlib.GetFontByName(c.Config.Hostname.FigletFontDir, c.Config.Hostname.FigletFont)
 	if err != nil {
 		return ""
 	}
-	renderStr := figletlib.SprintMsg(hostname, f, 80, f.Settings(), "left")
+	renderStr := figletlib.SprintMsg(hostname, f, c.Width, f.Settings(), "left")
 
 	colors := func() string {
 		colors := colorGrid(lipgloss.Width(renderStr), lipgloss.Height(renderStr))
