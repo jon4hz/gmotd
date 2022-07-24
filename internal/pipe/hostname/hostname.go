@@ -53,7 +53,7 @@ func (Pipe) Message(c *context.Context) string {
 	if err != nil {
 		return ""
 	}
-	renderStr := figletlib.SprintMsg(hostname, f, c.Width, f.Settings(), "left")
+	renderStr := figletlib.SprintMsg(hostname, f, c.Runtime.Width, f.Settings(), "left")
 
 	colors := func() string {
 		colors := colorGrid(lipgloss.Width(renderStr), lipgloss.Height(renderStr))

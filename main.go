@@ -19,8 +19,8 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	ctx.Width = w
-	ctx.Height = h
+	ctx.Runtime.Width = w
+	ctx.Runtime.Height = h
 
 	for _, d := range defaults.Defaulters {
 		d.Default(ctx)
