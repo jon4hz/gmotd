@@ -6,7 +6,7 @@ import (
 
 	"github.com/hako/durafmt"
 	"github.com/jon4hz/gmotd/context"
-	"github.com/shirou/gopsutil/host"
+	"github.com/shirou/gopsutil/v3/host"
 )
 
 type Pipe struct{}

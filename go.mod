@@ -7,9 +7,9 @@ require (
 	github.com/hako/durafmt v0.0.0-20210608085754-5c1018a4e16b
 	github.com/lucasb-eyer/go-colorful v1.2.0
 	github.com/lukesampson/figlet v0.0.0-20190211215653-8a3ef4a6ac42
-	github.com/shirou/gopsutil v3.21.11+incompatible
 	github.com/shirou/gopsutil/v3 v3.21.12
 	golang.org/x/term v0.0.0-20210927222741-03fcf44c2211
+	gopkg.in/ini.v1 v1.66.6
 )
 
 require (

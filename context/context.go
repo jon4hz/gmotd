@@ -33,5 +33,6 @@ type Uptime struct {
 }
 
 type Sysinfo struct {
-	Uptime time.Duration
+	Uptime   time.Duration
+	Platform string
 }

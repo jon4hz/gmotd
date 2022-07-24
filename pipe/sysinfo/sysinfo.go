@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"github.com/jon4hz/gmotd/context"
+	"github.com/jon4hz/gmotd/internal/platform"
 
 	"github.com/shirou/gopsutil/v3/host"
 )
@@ -21,7 +22,8 @@ func (Pipe) Gather(c *context.Context) error {
 	}
 
 	c.Sysinfo = &context.Sysinfo{
-		Uptime: time.Since(time.Unix(int64(t), 0)),
+		Uptime:   time.Since(time.Unix(int64(t), 0)),
+		Platform: platform.PrettyName(),
 	}
 	return nil
 }
@@ -31,13 +33,7 @@ func (Pipe) Print(c *context.Context) string {
 		return ""
 	}
 	var s strings.Builder
-	s.WriteString(fmt.Sprintf("Uptime: %s\n", c.Uptime.Uptime))
-
-	platform, family, version, err := host.PlatformInformation()
-	if err != nil {
-		return ""
-	}
-	s.WriteString(fmt.Sprintf("Platform: %s %s %s\n", platform, family, version))
-
+	s.WriteString(fmt.Sprintf("Uptime: %s\n", c.Sysinfo.Uptime))
+	s.WriteString(fmt.Sprintf("Platform: %s\n", c.Sysinfo.Platform))
 	return s.String()
 }
