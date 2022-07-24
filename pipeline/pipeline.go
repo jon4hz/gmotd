@@ -3,14 +3,15 @@ package pipeline
 import (
 	"fmt"
 
-	"github.com/jon4hz/gmotd/internal/context"
-	"github.com/jon4hz/gmotd/internal/pipe/hostname"
-	"github.com/jon4hz/gmotd/internal/pipe/sysinfo"
-	"github.com/jon4hz/gmotd/internal/pipe/uptime"
+	"github.com/jon4hz/gmotd/context"
+	"github.com/jon4hz/gmotd/pipe/hostname"
+	"github.com/jon4hz/gmotd/pipe/sysinfo"
+	"github.com/jon4hz/gmotd/pipe/uptime"
 )
 
 type Pipe interface {
 	fmt.Stringer
+
 	Gather(*context.Context) error
 	Print(*context.Context) string
 }

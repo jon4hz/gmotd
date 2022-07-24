@@ -3,8 +3,8 @@ package defaults
 import (
 	"fmt"
 
-	"github.com/jon4hz/gmotd/internal/context"
-	"github.com/jon4hz/gmotd/internal/pipe/hostname"
+	"github.com/jon4hz/gmotd/context"
+	"github.com/jon4hz/gmotd/pipe/hostname"
 )
 
 type Defaulter interface {

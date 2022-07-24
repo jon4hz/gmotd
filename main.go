@@ -6,9 +6,9 @@ import (
 	"os"
 
 	"github.com/charmbracelet/lipgloss"
-	"github.com/jon4hz/gmotd/internal/context"
-	"github.com/jon4hz/gmotd/internal/defaults"
-	"github.com/jon4hz/gmotd/internal/pipeline"
+	"github.com/jon4hz/gmotd/context"
+	"github.com/jon4hz/gmotd/defaults"
+	"github.com/jon4hz/gmotd/pipeline"
 	"golang.org/x/term"
 )
 

@@ -10,7 +10,7 @@ import (
 	_ "embed"
 
 	"github.com/charmbracelet/lipgloss"
-	"github.com/jon4hz/gmotd/internal/context"
+	"github.com/jon4hz/gmotd/context"
 	"github.com/lucasb-eyer/go-colorful"
 	"github.com/lukesampson/figlet/figletlib"
 )

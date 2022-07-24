@@ -3,7 +3,7 @@ package context
 import (
 	"time"
 
-	"github.com/jon4hz/gmotd/internal/config"
+	"github.com/jon4hz/gmotd/config"
 )
 
 type Context struct {

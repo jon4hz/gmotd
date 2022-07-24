@@ -5,7 +5,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/jon4hz/gmotd/internal/context"
+	"github.com/jon4hz/gmotd/context"
 
 	"github.com/shirou/gopsutil/v3/host"
 )

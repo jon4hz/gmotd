@@ -5,7 +5,7 @@ import (
 	"time"
 
 	"github.com/hako/durafmt"
-	"github.com/jon4hz/gmotd/internal/context"
+	"github.com/jon4hz/gmotd/context"
 	"github.com/shirou/gopsutil/host"
 )
 
