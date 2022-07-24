@@ -35,4 +35,6 @@ type Uptime struct {
 type Sysinfo struct {
 	Uptime   time.Duration
 	Platform string
+	Kernel   string
+	CPU      string
 }

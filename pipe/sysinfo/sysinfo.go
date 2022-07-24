@@ -8,6 +8,7 @@ import (
 	"github.com/jon4hz/gmotd/context"
 	"github.com/jon4hz/gmotd/internal/platform"
 
+	"github.com/shirou/gopsutil/v3/cpu"
 	"github.com/shirou/gopsutil/v3/host"
 )
 
@@ -16,14 +17,26 @@ type Pipe struct{}
 func (Pipe) String() string { return "sysinfo" }
 
 func (Pipe) Gather(c *context.Context) error {
-	t, err := host.BootTime()
+	s, err := host.Info()
 	if err != nil {
-		return fmt.Errorf("failed to get uptime: %w", err)
+		return fmt.Errorf("failed to get host info: %w", err)
+	}
+
+	cpu, err := cpu.Info()
+	if err != nil {
+		return fmt.Errorf("failed to get cpu info: %w", err)
+	}
+
+	var cpuName string
+	if len(cpu) > 0 {
+		cpuName = cpu[0].ModelName
 	}
 
 	c.Sysinfo = &context.Sysinfo{
-		Uptime:   time.Since(time.Unix(int64(t), 0)),
+		Uptime:   time.Since(time.Unix(int64(s.BootTime), 0)),
 		Platform: platform.PrettyName(),
+		Kernel:   s.KernelVersion,
+		CPU:      cpuName,
 	}
 	return nil
 }
@@ -35,5 +48,7 @@ func (Pipe) Print(c *context.Context) string {
 	var s strings.Builder
 	s.WriteString(fmt.Sprintf("Uptime: %s\n", c.Sysinfo.Uptime))
 	s.WriteString(fmt.Sprintf("Platform: %s\n", c.Sysinfo.Platform))
+	s.WriteString(fmt.Sprintf("Kernel: %s\n", c.Sysinfo.Kernel))
+	s.WriteString(fmt.Sprintf("CPU: %s\n", c.Sysinfo.CPU))
 	return s.String()
 }
