@@ -14,15 +14,24 @@ type Pipe struct{}
 
 func (Pipe) String() string { return "sysinfo" }
 
-func (Pipe) Message(c *context.Context) string {
-	var s strings.Builder
-
+func (Pipe) Gather(c *context.Context) error {
 	t, err := host.BootTime()
 	if err != nil {
+		return fmt.Errorf("failed to get uptime: %w", err)
+	}
+
+	c.Sysinfo = &context.Sysinfo{
+		Uptime: time.Since(time.Unix(int64(t), 0)),
+	}
+	return nil
+}
+
+func (Pipe) Print(c *context.Context) string {
+	if c.Sysinfo == nil {
 		return ""
 	}
-	uptime := time.Since(time.Unix(int64(t), 0)).Round(time.Second)
-	s.WriteString(fmt.Sprintf("Uptime: %s\n", uptime))
+	var s strings.Builder
+	s.WriteString(fmt.Sprintf("Uptime: %s\n", c.Uptime.Uptime))
 
 	platform, family, version, err := host.PlatformInformation()
 	if err != nil {

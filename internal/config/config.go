@@ -1,13 +1,13 @@
 package config
 
 type Config struct {
-	Hostname HostnameConfig
+	Hostname Hostname
 }
 
-type HostnameConfig struct {
+type Hostname struct {
 	Disable       bool
+	Color         string
 	Figlet        bool
 	FigletFont    string
 	FigletFontDir string
-	FigletColor   string
 }

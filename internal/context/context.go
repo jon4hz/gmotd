@@ -1,10 +1,17 @@
 package context
 
-import "github.com/jon4hz/gmotd/internal/config"
+import (
+	"time"
+
+	"github.com/jon4hz/gmotd/internal/config"
+)
 
 type Context struct {
-	Config  *config.Config
-	Runtime *Runtime
+	Config   *config.Config
+	Runtime  *Runtime
+	Hostname *Hostname
+	Uptime   *Uptime
+	Sysinfo  *Sysinfo
 }
 
 type Runtime struct {
@@ -16,4 +23,15 @@ func New() *Context {
 		Config:  &config.Config{},
 		Runtime: &Runtime{},
 	}
+}
+
+type Hostname struct {
+	Hostname string
+}
+type Uptime struct {
+	Uptime time.Duration
+}
+
+type Sysinfo struct {
+	Uptime time.Duration
 }

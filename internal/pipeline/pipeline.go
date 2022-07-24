@@ -11,7 +11,8 @@ import (
 
 type Pipe interface {
 	fmt.Stringer
-	Message(*context.Context) string
+	Gather(*context.Context) error
+	Print(*context.Context) string
 }
 
 var Pipeline = []Pipe{

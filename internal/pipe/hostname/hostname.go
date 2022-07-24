@@ -1,6 +1,7 @@
 package hostname
 
 import (
+	"fmt"
 	"math/rand"
 	"os"
 	"strings"
@@ -20,40 +21,39 @@ func (Pipe) String() string { return "hostname" }
 
 func (Pipe) Default(ctx *context.Context) {
 	ctx.Config.Hostname.Figlet = true
-	ctx.Config.Hostname.FigletColor = "rainbow"
+	ctx.Config.Hostname.Color = "rainbow"
 	ctx.Config.Hostname.FigletFont = "standard"
 	ctx.Config.Hostname.FigletFontDir = "/usr/share/figlet/fonts"
 }
 
-func (Pipe) Skip(c *context.Context) bool {
-	return false
+func (Pipe) Gather(c *context.Context) error {
+	h, err := os.Hostname()
+	if err != nil {
+		return fmt.Errorf("failed to get hostname: %w", err)
+	}
+	c.Hostname = &context.Hostname{
+		Hostname: h,
+	}
+	return nil
 }
 
 //go:embed fonts/standard.flf
 var defaultFont []byte
 
-func (Pipe) Message(c *context.Context) string {
-	hostname, err := os.Hostname()
-	if err != nil {
-		return ""
-	}
+func (Pipe) Print(c *context.Context) string {
 	if !c.Config.Hostname.Figlet {
-		return hostname
+		return c.Hostname.Hostname
 	}
 
-	var f *figletlib.Font
-	if c.Config.Hostname.FigletFontDir != "" {
+	f, err := figletlib.GetFontByName(c.Config.Hostname.FigletFontDir, c.Config.Hostname.FigletFont)
+	if err != nil {
 		f, err = figletlib.ReadFontFromBytes(defaultFont)
 		if err != nil {
 			return ""
 		}
 	}
 
-	f, err = figletlib.GetFontByName(c.Config.Hostname.FigletFontDir, c.Config.Hostname.FigletFont)
-	if err != nil {
-		return ""
-	}
-	renderStr := figletlib.SprintMsg(hostname, f, c.Runtime.Width, f.Settings(), "left")
+	renderStr := figletlib.SprintMsg(c.Hostname.Hostname, f, c.Runtime.Width, f.Settings(), "left")
 
 	colors := func() string {
 		colors := colorGrid(lipgloss.Width(renderStr), lipgloss.Height(renderStr))

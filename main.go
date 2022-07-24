@@ -28,7 +28,11 @@ func main() {
 
 	var messages []string
 	for _, pipe := range pipeline.Pipeline {
-		messages = append(messages, pipe.Message(ctx))
+		if err := pipe.Gather(ctx); err != nil {
+			log.Println(err)
+			continue
+		}
+		messages = append(messages, pipe.Print(ctx))
 	}
 
 	fmt.Println(lipgloss.JoinVertical(lipgloss.Left, messages...))

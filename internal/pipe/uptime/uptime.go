@@ -1,6 +1,7 @@
 package uptime
 
 import (
+	"fmt"
 	"time"
 
 	"github.com/hako/durafmt"
@@ -12,11 +13,20 @@ type Pipe struct{}
 
 func (Pipe) String() string { return "uptime" }
 
-func (Pipe) Message(c *context.Context) string {
+func (Pipe) Gather(c *context.Context) error {
 	t, err := host.BootTime()
 	if err != nil {
+		return fmt.Errorf("failed to get uptime: %w", err)
+	}
+	c.Uptime = &context.Uptime{
+		Uptime: time.Since(time.Unix(int64(t), 0)),
+	}
+	return nil
+}
+
+func (Pipe) Print(c *context.Context) string {
+	if c.Uptime == nil {
 		return ""
 	}
-	uptime := time.Since(time.Unix(int64(t), 0)).Round(time.Second)
-	return "Uptime: " + durafmt.Parse(uptime).LimitFirstN(2).String()
+	return "Uptime: " + durafmt.Parse(c.Uptime.Uptime).LimitFirstN(2).String()
 }
