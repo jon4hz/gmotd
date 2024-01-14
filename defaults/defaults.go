@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/jon4hz/gmotd/context"
-	"github.com/jon4hz/gmotd/pipe/hostname"
+	"github.com/jon4hz/gmotd/section/hostname"
 )
 
 type Defaulter interface {
@@ -14,5 +14,5 @@ type Defaulter interface {
 }
 
 var Defaulters = []Defaulter{
-	hostname.Pipe{},
+	hostname.Section{},
 }

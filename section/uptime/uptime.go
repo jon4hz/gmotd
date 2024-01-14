@@ -9,11 +9,11 @@ import (
 	"github.com/shirou/gopsutil/v3/host"
 )
 
-type Pipe struct{}
+type Section struct{}
 
-func (Pipe) String() string { return "uptime" }
+func (Section) String() string { return "uptime" }
 
-func (Pipe) Gather(c *context.Context) error {
+func (Section) Gather(c *context.Context) error {
 	t, err := host.BootTimeWithContext(c)
 	if err != nil {
 		return fmt.Errorf("failed to get uptime: %w", err)
@@ -24,9 +24,9 @@ func (Pipe) Gather(c *context.Context) error {
 	return nil
 }
 
-func (Pipe) Print(c *context.Context) string {
+func (Section) Print(c *context.Context) string {
 	if c.Uptime == nil {
 		return ""
 	}
-	return "Uptime: " + durafmt.Parse(c.Uptime.Uptime).LimitFirstN(2).String()
+	return "uptime: " + durafmt.Parse(c.Uptime.Uptime).LimitFirstN(2).String()
 }

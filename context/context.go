@@ -16,6 +16,7 @@ type Context struct {
 	Hostname *Hostname
 	Uptime   *Uptime
 	Sysinfo  *SysInfo
+	Zpool    *Zpool
 }
 
 type Runtime struct {
@@ -44,13 +45,31 @@ type Uptime struct {
 }
 
 type SysInfo struct {
-	Uptime   time.Duration
-	Platform string
-	Kernel   string
-	CPU      string
-	Load     *LoadInfo
+	Uptime      time.Duration
+	Platform    string
+	Kernel      string
+	CPU         string
+	CPUCount    int
+	Load        *LoadInfo
+	RootProcs   int
+	UserProcs   int
+	MemoryTotal uint64
+	MemoryUsed  uint64
+	MemoryFree  uint64
 }
 
 type LoadInfo struct {
 	Load1, Load5, Load15 float64
+}
+
+type Zpool struct {
+	Pools []ZpoolPool
+}
+
+type ZpoolPool struct {
+	Name      string
+	Health    string
+	Capacity  uint64
+	Free      uint64
+	Allocated uint64
 }

@@ -8,7 +8,7 @@ import (
 	"github.com/charmbracelet/lipgloss"
 	"github.com/jon4hz/gmotd/context"
 	"github.com/jon4hz/gmotd/defaults"
-	"github.com/jon4hz/gmotd/pipeline"
+	"github.com/jon4hz/gmotd/message"
 	"golang.org/x/term"
 )
 
@@ -28,12 +28,14 @@ func main() {
 	}
 
 	var messages []string
-	for _, pipe := range pipeline.Pipeline {
+	for _, pipe := range message.Message {
 		if err := pipe.Gather(ctx); err != nil {
 			log.Println(err)
 			continue
 		}
-		messages = append(messages, pipe.Print(ctx))
+		if msg := pipe.Print(ctx); msg != "" {
+			messages = append(messages, msg, "")
+		}
 	}
 
 	fmt.Println(lipgloss.JoinVertical(lipgloss.Left, messages...))
