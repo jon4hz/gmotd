@@ -57,7 +57,7 @@ func (Section) Print(ctx *context.Context) string {
 
 	pools := make([]string, len(c.Pools)+1)
 	for i, p := range c.Pools {
-		pools[i+1] = styles.Indent.Render(renderZpool(p)) + "\n"
+		pools[i+1] = styles.Indent.Render(renderZpool(p))
 	}
 	pools[0] = "zpool usage:"
 
@@ -79,7 +79,7 @@ func renderZpool(zpool context.ZpoolPool) string {
 		name = styles.Red.Render(name + fmt.Sprintf(" (%s)", zpool.Health))
 	}
 
-	stat := statStyle.Width(progressWidth - lipgloss.Width(name)).
+	stat := statStyle.Width(progressWidth - lipgloss.Width(name) + 1).
 		Render(fmt.Sprintf(
 			"%d%% used out of %s",
 			zpool.Capacity,
@@ -92,8 +92,11 @@ func renderZpool(zpool context.ZpoolPool) string {
 		progress.WithWidth(progressWidth),
 		progress.WithoutPercentage(),
 	)
+	prog.Full = '='
+	prog.Empty = '='
+
 	return lipgloss.JoinVertical(lipgloss.Top,
 		name+stat,
-		prog.ViewAs(used),
+		"["+prog.ViewAs(used)+"]",
 	)
 }
