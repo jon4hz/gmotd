@@ -24,9 +24,10 @@ func (Section) Gather(c *context.Context) error {
 	return nil
 }
 
-func (Section) Print(c *context.Context) string {
-	if c.Uptime == nil {
+func (Section) Print(ctx *context.Context) string {
+	c := ctx.Uptime
+	if c == nil {
 		return ""
 	}
-	return "uptime: " + durafmt.Parse(c.Uptime.Uptime).LimitFirstN(2).String()
+	return "uptime: " + durafmt.Parse(c.Uptime).LimitFirstN(3).String()
 }
