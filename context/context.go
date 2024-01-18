@@ -18,6 +18,7 @@ type Context struct {
 	Sysinfo  *SysInfo
 	Zpool    *Zpool
 	Docker   *Docker
+	Smart    *Smart
 }
 
 type Runtime struct {
@@ -83,4 +84,14 @@ type DockerContainer struct {
 	Name    string
 	State   string
 	Healthy bool
+}
+
+type Smart struct {
+	Disks []DiskInfo
+}
+
+type DiskInfo struct {
+	Name        string
+	Temperature uint64
+	HasError    bool
 }

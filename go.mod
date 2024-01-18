@@ -3,6 +3,7 @@ module github.com/jon4hz/gmotd
 go 1.21
 
 require (
+	github.com/anatol/smart.go v0.0.0-20230705044831-c3b27137baa3
 	github.com/charmbracelet/bubbles v0.17.1
 	github.com/charmbracelet/lipgloss v0.9.1
 	github.com/docker/docker v24.0.7+incompatible
