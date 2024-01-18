@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"sync"
 
 	"github.com/charmbracelet/lipgloss"
 	"github.com/jon4hz/gmotd/context"
@@ -27,13 +28,22 @@ func main() {
 		d.Default(ctx)
 	}
 
+	var wg sync.WaitGroup
+	for _, section := range message.Message {
+		wg.Add(1)
+		go func(section message.Section) {
+			defer wg.Done()
+			if err := section.Gather(ctx); err != nil {
+				log.Println(err)
+				return
+			}
+		}(section)
+	}
+	wg.Wait()
+
 	var messages []string
-	for _, pipe := range message.Message {
-		if err := pipe.Gather(ctx); err != nil {
-			log.Println(err)
-			continue
-		}
-		if msg := pipe.Print(ctx); msg != "" {
+	for _, section := range message.Message {
+		if msg := section.Print(ctx); msg != "" {
 			messages = append(messages, msg, "")
 		}
 	}
