@@ -64,7 +64,7 @@ func (Section) Print(ctx *context.Context) string {
 	return lipgloss.JoinVertical(lipgloss.Top, pools...)
 }
 
-const progressWidth = 50
+const progressWidth = 60
 
 var statStyle = lipgloss.NewStyle().Align(lipgloss.Right)
 
