@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/jon4hz/gmotd/context"
+	"github.com/jon4hz/gmotd/section/docker"
 	"github.com/jon4hz/gmotd/section/hostname"
 	"github.com/jon4hz/gmotd/section/sysinfo"
 	"github.com/jon4hz/gmotd/section/uptime"
@@ -22,4 +23,5 @@ var Message = []Section{
 	uptime.Section{},
 	sysinfo.Section{},
 	zpool.Section{},
+	docker.Section{},
 }

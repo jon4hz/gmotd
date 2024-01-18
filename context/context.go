@@ -17,6 +17,7 @@ type Context struct {
 	Uptime   *Uptime
 	Sysinfo  *SysInfo
 	Zpool    *Zpool
+	Docker   *Docker
 }
 
 type Runtime struct {
@@ -72,4 +73,14 @@ type ZpoolPool struct {
 	Capacity  uint64
 	Free      uint64
 	Allocated uint64
+}
+
+type Docker struct {
+	Containers []DockerContainer
+}
+
+type DockerContainer struct {
+	Name    string
+	State   string
+	Healthy bool
 }
