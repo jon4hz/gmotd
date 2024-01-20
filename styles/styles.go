@@ -2,6 +2,7 @@ package styles
 
 import (
 	"github.com/charmbracelet/lipgloss"
+	"golang.org/x/exp/constraints"
 )
 
 var (
@@ -13,7 +14,7 @@ var (
 )
 
 type Floatable interface {
-	int | int8 | int16 | int32 | int64 | uint | uint8 | uint16 | uint32 | uint64 | float32 | float64
+	constraints.Float | constraints.Integer
 }
 
 func ColorizeWithMax[T Floatable](x T, max T) lipgloss.Style {
