@@ -30,7 +30,14 @@ func New() *Context {
 	return &Context{
 		Context: c,
 		cancel:  cancel,
-		Config:  &config.Config{},
+		Config: &config.Config{
+			Hostname: new(config.Hostname),
+			Uptime:   new(config.Uptime),
+			SysInfo:  new(config.SysInfo),
+			Zpool:    new(config.Zpool),
+			Docker:   new(config.Docker),
+			Smart:    new(config.Smart),
+		},
 		Runtime: &Runtime{},
 	}
 }

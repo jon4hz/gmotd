@@ -14,11 +14,15 @@ type Section struct{}
 
 func (Section) String() string { return "smart" }
 
+func (Section) Enabled(c *context.Context) bool {
+	return !c.Config.Smart.Disabled
+}
+
+func (Section) Default(ctx *context.Context) {
+	ctx.Config.Smart.Disks = []string{"/dev/sda"}
+}
+
 func (Section) Gather(c *context.Context) error {
-
-	// tmp
-	c.Config.Smart.Disks = []string{"/dev/sda", "/dev/sdb", "/dev/sdc", "/dev/sdd", "/dev/sde", "/dev/sdf", "/dev/sdg", "/dev/sdh"}
-
 	disk := make([]context.DiskInfo, 0, len(c.Config.Smart.Disks))
 	for _, d := range c.Config.Smart.Disks {
 		dev, err := smart.Open(d)

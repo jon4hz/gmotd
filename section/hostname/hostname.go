@@ -18,6 +18,10 @@ type Section struct{}
 
 func (Section) String() string { return "hostname" }
 
+func (Section) Enabled(c *context.Context) bool {
+	return !c.Config.Hostname.Disabled
+}
+
 func (Section) Default(ctx *context.Context) {
 	ctx.Config.Hostname.Figlet = true
 	ctx.Config.Hostname.Color = "rainbow"

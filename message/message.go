@@ -12,9 +12,16 @@ import (
 	"github.com/jon4hz/gmotd/section/zpool"
 )
 
+type Defaulter interface {
+	fmt.Stringer
+
+	Default(ctx *context.Context)
+}
+
 type Section interface {
 	fmt.Stringer
 
+	Enabled(*context.Context) bool
 	Gather(*context.Context) error
 	Print(*context.Context) string
 }

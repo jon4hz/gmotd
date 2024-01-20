@@ -13,6 +13,10 @@ type Section struct{}
 
 func (Section) String() string { return "uptime" }
 
+func (Section) Enabled(c *context.Context) bool {
+	return !c.Config.Uptime.Disabled
+}
+
 func (Section) Gather(c *context.Context) error {
 	t, err := host.BootTimeWithContext(c)
 	if err != nil {

@@ -22,6 +22,10 @@ type Section struct{}
 
 func (Section) String() string { return "sysinfo" }
 
+func (Section) Enabled(c *context.Context) bool {
+	return !c.Config.SysInfo.Disabled
+}
+
 func (Section) Gather(c *context.Context) error {
 	s, err := host.InfoWithContext(c)
 	if err != nil {

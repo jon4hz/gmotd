@@ -16,6 +16,10 @@ type Section struct{}
 
 func (Section) String() string { return "docker" }
 
+func (Section) Enabled(c *context.Context) bool {
+	return !c.Config.Docker.Disabled
+}
+
 func (Section) Gather(c *context.Context) error {
 	cli, err := client.NewClientWithOpts(client.FromEnv)
 	if err != nil {

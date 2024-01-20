@@ -16,6 +16,14 @@ type Section struct{}
 
 func (Section) String() string { return "zpool" }
 
+func (Section) Enabled(c *context.Context) bool {
+	return !c.Config.Zpool.Disabled
+}
+
+/* func (Section) Default(ctx *context.Context) {
+	ctx.Config.Zpool.Disabled = true
+} */
+
 func (Section) Gather(c *context.Context) error {
 	z := zfs.New()
 
