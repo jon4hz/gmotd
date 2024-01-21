@@ -26,6 +26,10 @@ func (Section) Enabled(c *context.Context) bool {
 	return !c.Config.SysInfo.Disabled
 }
 
+func (Section) Default(ctx *context.Context) {
+	ctx.Config.SysInfo.UptimePrecision = 3
+}
+
 func (Section) Gather(c *context.Context) error {
 	s, err := host.InfoWithContext(c)
 	if err != nil {
@@ -113,7 +117,7 @@ func (Section) Print(ctx *context.Context) string {
 		style("Distro")+": "+c.Platform,
 		style("Kernel")+": "+c.Kernel,
 		"",
-		style("Uptime")+": "+durafmt.Parse(c.Uptime).LimitFirstN(3).String(),
+		style("Uptime")+": "+durafmt.Parse(c.Uptime).LimitFirstN(ctx.Config.SysInfo.UptimePrecision).String(),
 		style("Load")+":"+fmt.Sprintf(" %s (1m), %s (5m), %s (15m)", greenF(c.Load.Load1), greenF(c.Load.Load5), greenF(c.Load.Load15)),
 		style("Processes")+":"+fmt.Sprintf(" %s (root), %s (user), %s (total)", green(c.RootProcs), green(c.UserProcs), green(c.RootProcs+c.UserProcs)),
 		"",

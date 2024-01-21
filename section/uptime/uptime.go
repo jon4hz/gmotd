@@ -17,6 +17,10 @@ func (Section) Enabled(c *context.Context) bool {
 	return !c.Config.Uptime.Disabled
 }
 
+func (Section) Default(ctx *context.Context) {
+	ctx.Config.Uptime.Precision = 3
+}
+
 func (Section) Gather(c *context.Context) error {
 	t, err := host.BootTimeWithContext(c)
 	if err != nil {
@@ -33,5 +37,5 @@ func (Section) Print(ctx *context.Context) string {
 	if c == nil {
 		return ""
 	}
-	return "uptime: " + durafmt.Parse(c.Uptime).LimitFirstN(3).String()
+	return "uptime: " + durafmt.Parse(c.Uptime).LimitFirstN(ctx.Config.Uptime.Precision).String()
 }

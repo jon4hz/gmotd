@@ -24,7 +24,8 @@ type Uptime struct {
 }
 
 type SysInfo struct {
-	Disabled bool `mapstructure:"disabled"`
+	Disabled        bool `mapstructure:"disabled"`
+	UptimePrecision int  `mapstructure:"uptime_precision"`
 }
 
 type Zpool struct {
