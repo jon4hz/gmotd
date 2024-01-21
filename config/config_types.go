@@ -7,6 +7,7 @@ type Config struct {
 	Zpool    *Zpool    `mapstructure:"zpool"`
 	Docker   *Docker   `mapstructure:"docker"`
 	Smart    *Smart    `mapstructure:"smart"`
+	Systemd  *Systemd  `mapstructure:"systemd"`
 }
 
 type Hostname struct {
@@ -38,4 +39,9 @@ type Docker struct {
 type Smart struct {
 	Disabled bool     `mapstructure:"disabled"`
 	Disks    []string `mapstructure:"disks"`
+}
+
+type Systemd struct {
+	Disabled bool     `mapstructure:"disabled"`
+	Units    []string `mapstructure:"units"`
 }

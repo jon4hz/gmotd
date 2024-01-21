@@ -19,6 +19,7 @@ type Context struct {
 	Zpool    *Zpool
 	Docker   *Docker
 	Smart    *Smart
+	Systemd  *Systemd
 }
 
 type Runtime struct {
@@ -37,6 +38,7 @@ func New() *Context {
 			Zpool:    new(config.Zpool),
 			Docker:   new(config.Docker),
 			Smart:    new(config.Smart),
+			Systemd:  new(config.Systemd),
 		},
 		Runtime: &Runtime{},
 	}
@@ -101,4 +103,13 @@ type DiskInfo struct {
 	Name        string
 	Temperature uint64
 	HasError    bool
+}
+
+type Systemd struct {
+	Units []SystemdUnit
+}
+
+type SystemdUnit struct {
+	Name        string
+	ActiveState string
 }

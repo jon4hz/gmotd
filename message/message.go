@@ -8,6 +8,7 @@ import (
 	"github.com/jon4hz/gmotd/section/hostname"
 	"github.com/jon4hz/gmotd/section/smart"
 	"github.com/jon4hz/gmotd/section/sysinfo"
+	"github.com/jon4hz/gmotd/section/systemd"
 	"github.com/jon4hz/gmotd/section/uptime"
 	"github.com/jon4hz/gmotd/section/zpool"
 )
@@ -33,4 +34,5 @@ var Message = []Section{
 	zpool.Section{},
 	docker.Section{},
 	smart.Section{},
+	systemd.Section{},
 }
