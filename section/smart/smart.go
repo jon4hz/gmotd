@@ -8,6 +8,7 @@ import (
 	"github.com/charmbracelet/lipgloss"
 	"github.com/jon4hz/gmotd/context"
 	"github.com/jon4hz/gmotd/styles"
+	"github.com/spf13/viper"
 )
 
 type Section struct{}
@@ -19,7 +20,7 @@ func (Section) Enabled(c *context.Context) bool {
 }
 
 func (Section) Default(ctx *context.Context) {
-	ctx.Config.Smart.Disks = []string{"/dev/sda"}
+	viper.SetDefault("smart.disks", []string{"/dev/sda"})
 }
 
 func (Section) Gather(c *context.Context) error {
