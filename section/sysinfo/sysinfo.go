@@ -8,7 +8,7 @@ import (
 	humanize "github.com/dustin/go-humanize"
 	"github.com/hako/durafmt"
 	"github.com/jon4hz/gmotd/context"
-	"github.com/jon4hz/gmotd/internal/platform"
+	"github.com/jon4hz/gmotd/pkg/platform"
 	"github.com/jon4hz/gmotd/styles"
 
 	"github.com/shirou/gopsutil/v3/cpu"
