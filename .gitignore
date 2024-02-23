@@ -1,1 +1,3 @@
 gmotd.yml
+pam_gmotd.so
+pam_gmotd.h
