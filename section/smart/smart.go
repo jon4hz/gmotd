@@ -40,6 +40,7 @@ func (Section) Gather(c *context.Context) error {
 		}
 
 		hasErr := false
+		var diskType context.DiskType
 		switch sm := dev.(type) {
 		case *smart.SataDevice:
 			stLog, err := sm.ReadSMARTSelfTestLog()
@@ -52,12 +53,28 @@ func (Section) Gather(c *context.Context) error {
 					hasErr = true
 				}
 			}
+
+			iden, err := sm.Identify()
+			if err != nil {
+				log.Printf("failed to read identify: %s", err)
+				continue
+			}
+
+			if iden.RotationRate != 0 {
+				diskType = context.DiskTypeHDD
+			} else {
+				diskType = context.DiskTypeSSD
+			}
+
+		case *smart.NVMeDevice:
+			diskType = context.DiskTypeNVMe
 		}
 
 		disk = append(disk, context.DiskInfo{
 			Name:        d,
 			Temperature: a.Temperature,
 			HasError:    hasErr,
+			Type:        diskType,
 		})
 	}
 
@@ -66,7 +83,10 @@ func (Section) Gather(c *context.Context) error {
 	return nil
 }
 
-const maxTemp = 40
+const (
+	maxTempHDD = 45
+	maxTempSSD = 70
+)
 
 var leftColumnStyle = lipgloss.NewStyle().PaddingRight(4)
 
@@ -82,8 +102,10 @@ func (Section) Print(ctx *context.Context) string {
 		oddAdd = 1
 	}
 
+	lnw := longestNameWidth(c.Disks)
+
 	for _, d := range c.Disks {
-		disks = append(disks, renderDisk(d))
+		disks = append(disks, renderDisk(d, lnw))
 	}
 
 	leftColumn := lipgloss.JoinVertical(lipgloss.Top, disks[:len(disks)/2+oddAdd]...)
@@ -100,15 +122,38 @@ func (Section) Print(ctx *context.Context) string {
 	)
 }
 
-func renderDisk(d context.DiskInfo) string {
-	return fmt.Sprintf("%s:  %s | %s", d.Name, renderTemp(d.Temperature), renderError(d.HasError))
+func renderDisk(d context.DiskInfo, lnw int) string {
+	return fmt.Sprintf("%s%s | %s", renderName(d.Name, lnw), renderTemp(d.Temperature, d.Type), renderError(d.HasError))
 }
 
-func renderTemp(t uint64) string {
+func longestNameWidth(disks []context.DiskInfo) int {
+	max := 0
+	for _, d := range disks {
+		if len(d.Name) > max {
+			max = len(d.Name)
+		}
+	}
+	return max
+}
+
+func renderName(name string, lnw int) string {
+	return lipgloss.NewStyle().Width(lnw + 2).Render(name + ":")
+}
+
+func renderTemp(t uint64, dtype context.DiskType) string {
 	if t == 0 {
 		return styles.Red.Render("--C")
 	}
-	if t > maxTemp {
+
+	var maxTmp uint64
+	switch dtype {
+	case context.DiskTypeHDD:
+		maxTmp = maxTempHDD
+	case context.DiskTypeSSD, context.DiskTypeNVMe:
+		maxTmp = maxTempSSD
+	}
+
+	if t > maxTmp {
 		return styles.Red.Render(fmt.Sprintf("%dC", t))
 	}
 	return styles.Green.Render(fmt.Sprintf("%dC", t))

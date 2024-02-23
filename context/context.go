@@ -101,8 +101,17 @@ type Smart struct {
 	Disks []DiskInfo
 }
 
+type DiskType string
+
+const (
+	DiskTypeHDD  DiskType = "hdd"
+	DiskTypeSSD  DiskType = "ssd"
+	DiskTypeNVMe DiskType = "nvme"
+)
+
 type DiskInfo struct {
 	Name        string
+	Type        DiskType
 	Temperature uint64
 	HasError    bool
 }
