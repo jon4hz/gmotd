@@ -20,6 +20,7 @@ type Context struct {
 	Docker   *Docker
 	Smart    *Smart
 	Systemd  *Systemd
+	Plex     *Plex
 }
 
 type Runtime struct {
@@ -39,6 +40,7 @@ func New() *Context {
 			Docker:   new(config.Docker),
 			Smart:    new(config.Smart),
 			Systemd:  new(config.Systemd),
+			Plex:     new(config.Plex),
 		},
 		Runtime: &Runtime{},
 	}
@@ -112,4 +114,8 @@ type Systemd struct {
 type SystemdUnit struct {
 	Name        string
 	ActiveState string
+}
+
+type Plex struct {
+	Sessions int
 }

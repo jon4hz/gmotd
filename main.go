@@ -24,17 +24,17 @@ func main() {
 	ctx.Runtime.Width = w
 	ctx.Runtime.Height = h
 
-	err = config.Load(ctx.Config)
-	if err != nil {
-		log.Fatal(err)
-	}
-
 	for _, m := range message.Message {
 		d, ok := m.(message.Defaulter)
 		if !ok {
 			continue
 		}
 		d.Default(ctx)
+	}
+
+	err = config.Load(ctx.Config)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	var wg sync.WaitGroup

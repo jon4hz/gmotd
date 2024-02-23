@@ -8,6 +8,7 @@ type Config struct {
 	Docker   *Docker   `mapstructure:"docker"`
 	Smart    *Smart    `mapstructure:"smart"`
 	Systemd  *Systemd  `mapstructure:"systemd"`
+	Plex     *Plex     `mapstructure:"plex"`
 }
 
 type Hostname struct {
@@ -45,4 +46,12 @@ type Smart struct {
 type Systemd struct {
 	Disabled bool     `mapstructure:"disabled"`
 	Units    []string `mapstructure:"units"`
+}
+
+type Plex struct {
+	Disabled  bool   `mapstructure:"disabled"`
+	Token     string `mapstructure:"token"`
+	Server    string `mapstructure:"server"`
+	TLSVerify bool   `mapstructure:"tls_verify"`
+	Timeout   int    `mapstructure:"timeout"`
 }

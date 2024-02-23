@@ -6,6 +6,7 @@ import (
 	"github.com/jon4hz/gmotd/context"
 	"github.com/jon4hz/gmotd/section/docker"
 	"github.com/jon4hz/gmotd/section/hostname"
+	"github.com/jon4hz/gmotd/section/plex"
 	"github.com/jon4hz/gmotd/section/smart"
 	"github.com/jon4hz/gmotd/section/sysinfo"
 	"github.com/jon4hz/gmotd/section/systemd"
@@ -35,4 +36,5 @@ var Message = []Section{
 	docker.Section{},
 	smart.Section{},
 	systemd.Section{},
+	plex.Section{},
 }
