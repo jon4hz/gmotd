@@ -8,7 +8,7 @@ func Load(cfg *Config) error {
 	viper.SetConfigName("gmotd")
 	viper.SetConfigType("yaml")
 	viper.AddConfigPath(".")
-	viper.AddConfigPath("$HOME/.gmotd")
+	viper.AddConfigPath("$HOME/.config/gmotd")
 	viper.AddConfigPath("/etc/gmotd")
 
 	if err := viper.ReadInConfig(); err != nil {

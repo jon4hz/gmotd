@@ -46,7 +46,7 @@ session    optional     pam_exec.so stdout /usr/bin/gmotd
 `gmotd` loads it's configuration from the following locations:
 
 1. `gmotd.yml`
-2. `~/.config/gmotd.yml`
+2. `~/.config/gmotd/gmotd.yml`
 3. `/etc/gmotd/gmotd.yml`
 
 First come, first serve.
