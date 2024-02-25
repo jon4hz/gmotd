@@ -3,26 +3,17 @@ package main
 import (
 	"fmt"
 	"log"
-	"os"
 	"sync"
 
 	"github.com/charmbracelet/lipgloss"
 	"github.com/jon4hz/gmotd/config"
 	"github.com/jon4hz/gmotd/context"
 	"github.com/jon4hz/gmotd/message"
-	"golang.org/x/term"
 )
 
 func main() {
 	ctx := context.New()
 	defer ctx.Cancel()
-
-	w, h, err := term.GetSize(int(os.Stdout.Fd()))
-	if err != nil {
-		log.Fatal(err)
-	}
-	ctx.Runtime.Width = w
-	ctx.Runtime.Height = h
 
 	for _, m := range message.Message {
 		d, ok := m.(message.Defaulter)
@@ -32,7 +23,7 @@ func main() {
 		d.Default(ctx)
 	}
 
-	err = config.Load(ctx.Config)
+	err := config.Load(ctx.Config)
 	if err != nil {
 		log.Fatal(err)
 	}

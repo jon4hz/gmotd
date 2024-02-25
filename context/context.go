@@ -12,7 +12,6 @@ type Context struct {
 	cancel context.CancelFunc
 
 	Config   *config.Config
-	Runtime  *Runtime
 	Hostname *Hostname
 	Uptime   *Uptime
 	Sysinfo  *SysInfo
@@ -23,9 +22,9 @@ type Context struct {
 	Plex     *Plex
 }
 
-type Runtime struct {
+/* type Runtime struct {
 	Width, Height int
-}
+} */
 
 func New() *Context {
 	c, cancel := context.WithTimeout(context.Background(), time.Second*30)
@@ -42,7 +41,6 @@ func New() *Context {
 			Systemd:  new(config.Systemd),
 			Plex:     new(config.Plex),
 		},
-		Runtime: &Runtime{},
 	}
 }
 

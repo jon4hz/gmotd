@@ -56,7 +56,7 @@ func (Section) Print(c *context.Context) string {
 		}
 	}
 
-	renderStr := figletlib.SprintMsg(c.Hostname.Hostname, f, c.Runtime.Width, f.Settings(), "left")
+	renderStr := figletlib.SprintMsg(c.Hostname.Hostname, f, 200, f.Settings(), "left")
 
 	colors := func() string {
 		colors := colorGrid(lipgloss.Width(renderStr), lipgloss.Height(renderStr))
