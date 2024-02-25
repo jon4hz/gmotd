@@ -35,26 +35,38 @@ func main() {
 	var (
 		sectionResults = make(map[string]string)
 		wg             sync.WaitGroup
+		doneC          = make(chan struct{})
 	)
-	for _, section := range message.Message {
-		if !section.Enabled(ctx) {
-			continue
+
+	go func() {
+		for _, section := range message.Message {
+			if !section.Enabled(ctx) {
+				continue
+			}
+			wg.Add(1)
+			go func(section message.Section) {
+				defer wg.Done()
+				if err := section.Gather(ctx); err != nil {
+					log.Println(err)
+					return
+				}
+
+				if msg := section.Print(ctx); msg != "" {
+					sectionResults[section.String()] = msg + "\n"
+				}
+
+			}(section)
 		}
-		wg.Add(1)
-		go func(section message.Section) {
-			defer wg.Done()
-			if err := section.Gather(ctx); err != nil {
-				log.Println(err)
-				return
-			}
+		wg.Wait()
+		close(doneC)
+	}()
 
-			if msg := section.Print(ctx); msg != "" {
-				sectionResults[section.String()] = msg + "\n"
-			}
-
-		}(section)
+	select {
+	case <-ctx.Done():
+		log.Fatalln("Error: context expired")
+		return
+	case <-doneC:
 	}
-	wg.Wait()
 
 	var messages []string
 	printed := make(map[string]struct{})
