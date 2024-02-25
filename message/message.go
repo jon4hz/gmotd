@@ -33,8 +33,8 @@ var Message = []Section{
 	uptime.Section{},
 	sysinfo.Section{},
 	zpool.Section{},
-	docker.Section{},
 	smart.Section{},
+	docker.Section{},
 	systemd.Section{},
 	plex.Section{},
 }
