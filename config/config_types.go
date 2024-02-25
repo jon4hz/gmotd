@@ -1,6 +1,7 @@
 package config
 
 type Config struct {
+	Order    []string  `mapstructure:"order"`
 	Hostname *Hostname `mapstructure:"hostname"`
 	Uptime   *Uptime   `mapstructure:"uptime"`
 	SysInfo  *SysInfo  `mapstructure:"sysinfo"`

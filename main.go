@@ -32,7 +32,10 @@ func main() {
 	// maybe make this a config option.
 	lipgloss.SetColorProfile(termenv.TrueColor)
 
-	var wg sync.WaitGroup
+	var (
+		sectionResults = make(map[string]string)
+		wg             sync.WaitGroup
+	)
 	for _, section := range message.Message {
 		if !section.Enabled(ctx) {
 			continue
@@ -44,17 +47,39 @@ func main() {
 				log.Println(err)
 				return
 			}
+
+			if msg := section.Print(ctx); msg != "" {
+				sectionResults[section.String()] = msg + "\n"
+			}
+
 		}(section)
 	}
 	wg.Wait()
 
 	var messages []string
+	printed := make(map[string]struct{})
+
+	// check if specific order is set
+	if len(ctx.Config.Order) > 0 {
+		for _, section := range ctx.Config.Order {
+			if result, ok := sectionResults[section]; ok {
+				messages = append(messages, result)
+				printed[section] = struct{}{}
+			}
+		}
+	}
+
+	// print the rest
 	for _, section := range message.Message {
 		if !section.Enabled(ctx) {
 			continue
 		}
-		if msg := section.Print(ctx); msg != "" {
-			messages = append(messages, msg, "")
+		// skip if already printed
+		if _, ok := printed[section.String()]; ok {
+			continue
+		}
+		if msg, ok := sectionResults[section.String()]; ok {
+			messages = append(messages, msg)
 		}
 	}
 
