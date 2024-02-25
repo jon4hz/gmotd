@@ -9,6 +9,7 @@ import (
 	"github.com/jon4hz/gmotd/config"
 	"github.com/jon4hz/gmotd/context"
 	"github.com/jon4hz/gmotd/message"
+	"github.com/muesli/termenv"
 )
 
 func main() {
@@ -27,6 +28,9 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	// maybe make this a config option.
+	lipgloss.SetColorProfile(termenv.TrueColor)
 
 	var wg sync.WaitGroup
 	for _, section := range message.Message {
