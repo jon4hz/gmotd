@@ -2,6 +2,7 @@ package zpool
 
 import (
 	"fmt"
+	"os"
 	"sort"
 
 	"github.com/charmbracelet/bubbles/progress"
@@ -10,6 +11,8 @@ import (
 	"github.com/jon4hz/gmotd/context"
 	"github.com/jon4hz/gmotd/styles"
 	"github.com/krystal/go-zfs"
+	"github.com/muesli/termenv"
+	"github.com/spf13/viper"
 )
 
 type Section struct{}
@@ -20,12 +23,15 @@ func (Section) Enabled(c *context.Context) bool {
 	return !c.Config.Zpool.Disabled
 }
 
-/* func (Section) Default(ctx *context.Context) {
-	ctx.Config.Zpool.Disabled = true
-} */
+func (Section) Default(ctx *context.Context) {
+	viper.SetDefault("zpool.disabled", true)
+}
 
 func (Section) Gather(c *context.Context) error {
 	z := zfs.New()
+
+	// Set PATH to make sure we can find zpool
+	os.Setenv("PATH", "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin")
 
 	pools, err := z.ListPools(c)
 	if err != nil {
@@ -99,6 +105,7 @@ func renderZpool(zpool context.ZpoolPool) string {
 		progress.WithGradient("#9ece6a", "#fd665f"),
 		progress.WithWidth(progressWidth),
 		progress.WithoutPercentage(),
+		progress.WithColorProfile(termenv.TrueColor),
 	)
 	prog.Full = '='
 	prog.Empty = '='

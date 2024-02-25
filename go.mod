@@ -13,10 +13,10 @@ require (
 	github.com/krystal/go-zfs v0.1.3
 	github.com/lucasb-eyer/go-colorful v1.2.0
 	github.com/lukesampson/figlet v0.0.0-20190211215653-8a3ef4a6ac42
+	github.com/muesli/termenv v0.15.2
 	github.com/shirou/gopsutil/v3 v3.21.12
 	github.com/spf13/viper v1.18.2
 	golang.org/x/exp v0.0.0-20230905200255-921286631fa9
-	golang.org/x/term v0.16.0
 	gopkg.in/ini.v1 v1.67.0
 )
 
@@ -47,7 +47,6 @@ require (
 	github.com/muesli/ansi v0.0.0-20211018074035-2e021307bc4b // indirect
 	github.com/muesli/cancelreader v0.2.2 // indirect
 	github.com/muesli/reflow v0.3.0 // indirect
-	github.com/muesli/termenv v0.15.2 // indirect
 	github.com/opencontainers/go-digest v1.0.0 // indirect
 	github.com/opencontainers/image-spec v1.0.2 // indirect
 	github.com/pelletier/go-toml/v2 v2.1.0 // indirect
@@ -69,6 +68,7 @@ require (
 	golang.org/x/crypto v0.18.0 // indirect
 	golang.org/x/sync v0.5.0 // indirect
 	golang.org/x/sys v0.16.0 // indirect
+	golang.org/x/term v0.16.0 // indirect
 	golang.org/x/text v0.14.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 	gotest.tools/v3 v3.5.1 // indirect
