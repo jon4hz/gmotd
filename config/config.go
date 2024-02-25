@@ -11,8 +11,6 @@ func Load(cfg *Config) error {
 	viper.AddConfigPath("$HOME/.gmotd")
 	viper.AddConfigPath(".")
 
-	setDefaults()
-
 	if err := viper.ReadInConfig(); err != nil {
 		if _, ok := err.(viper.ConfigFileNotFoundError); ok {
 			return nil
@@ -25,8 +23,4 @@ func Load(cfg *Config) error {
 	}
 
 	return nil
-}
-
-func setDefaults() {
-	viper.SetDefault("zpool.disabled", true)
 }
