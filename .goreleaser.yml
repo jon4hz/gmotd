@@ -41,7 +41,6 @@ builds:
 archives:
   -
     id: default
-    rlcp: true
     name_template: "{{ .Var.binary_name }}-v{{ .Version }}-{{ .Os }}-{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}{{ if .Mips }}-{{ .Mips }}{{ end }}"
     builds:
       - default
@@ -79,7 +78,6 @@ aurs:
     package: '{{ .Var.aur_package }}'
 
 source:
-  rlcp: true
   enabled: true
 
 snapshot:
@@ -108,7 +106,7 @@ furies:
 brews:
   -
     name: '{{ .Var.binary_name }}'
-    tap:
+    repository:
       owner: jon4hz
       name: homebrew-tap
       token: "{{ .Env.HOMEBREW_TAP_GITHUB_TOKEN }}"
