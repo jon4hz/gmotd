@@ -12,16 +12,16 @@ $ go install github.com/jon4hz/gmotd@latest
 $ yay -S gmotd-bin
 
 # local pkg manager
-$ VERSION=v1.0.0
+$ VERSION=v0.1.0
 
 ## debian / ubuntu
-$ dpkg -i fztea-$VERSION-linux-amd64.deb
+$ dpkg -i gmotd-$VERSION-linux-amd64.deb
 
 ## rhel / fedora / suse
-$ rpm -i fztea-$VERSION-linux-amd64.rpm
+$ rpm -i gmotd-$VERSION-linux-amd64.rpm
 
 ## alpine
-$ apk add --allow-untrusted fztea-$VERSION-linux-amd64.apk
+$ apk add --allow-untrusted gmotd-$VERSION-linux-amd64.apk
 
 # homebrew (macOS & linux)
 $ brew install jon4hz/homebrew-tap/gmotd
