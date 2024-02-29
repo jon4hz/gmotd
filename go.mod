@@ -6,6 +6,7 @@ require (
 	github.com/anatol/smart.go v0.0.0-20230705044831-c3b27137baa3
 	github.com/charmbracelet/bubbles v0.18.0
 	github.com/charmbracelet/lipgloss v0.9.1
+	github.com/charmbracelet/log v0.3.1
 	github.com/coreos/go-systemd/v22 v22.5.0
 	github.com/docker/docker v25.0.3+incompatible
 	github.com/dustin/go-humanize v1.0.1
@@ -16,7 +17,7 @@ require (
 	github.com/muesli/termenv v0.15.2
 	github.com/shirou/gopsutil/v3 v3.24.1
 	github.com/spf13/viper v1.18.2
-	golang.org/x/exp v0.0.0-20230905200255-921286631fa9
+	golang.org/x/exp v0.0.0-20231006140011-7918f672742d
 	gopkg.in/ini.v1 v1.67.0
 )
 
@@ -32,6 +33,7 @@ require (
 	github.com/docker/go-units v0.5.0 // indirect
 	github.com/felixge/httpsnoop v1.0.4 // indirect
 	github.com/fsnotify/fsnotify v1.7.0 // indirect
+	github.com/go-logfmt/logfmt v0.6.0 // indirect
 	github.com/go-logr/logr v1.4.1 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect
 	github.com/go-ole/go-ole v1.2.6 // indirect

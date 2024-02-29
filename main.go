@@ -2,10 +2,10 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"sync"
 
 	"github.com/charmbracelet/lipgloss"
+	"github.com/charmbracelet/log"
 	"github.com/jon4hz/gmotd/config"
 	"github.com/jon4hz/gmotd/context"
 	"github.com/jon4hz/gmotd/message"
@@ -47,7 +47,7 @@ func main() {
 			go func(section message.Section) {
 				defer wg.Done()
 				if err := section.Gather(ctx); err != nil {
-					log.Println(err)
+					log.Error("Section gather returned error!", "section", section.String(), "err", err)
 					return
 				}
 
@@ -63,7 +63,7 @@ func main() {
 
 	select {
 	case <-ctx.Done():
-		log.Fatalln("Error: context expired")
+		log.Fatal("Error: context expired")
 		return
 	case <-doneC:
 	}
