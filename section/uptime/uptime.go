@@ -7,6 +7,7 @@ import (
 	"github.com/hako/durafmt"
 	"github.com/jon4hz/gmotd/context"
 	"github.com/shirou/gopsutil/v3/host"
+	"github.com/spf13/viper"
 )
 
 type Section struct{}
@@ -18,7 +19,7 @@ func (Section) Enabled(c *context.Context) bool {
 }
 
 func (Section) Default(ctx *context.Context) {
-	ctx.Config.Uptime.Precision = 3
+	viper.SetDefault("uptime.precisioin", 3)
 }
 
 func (Section) Gather(c *context.Context) error {
