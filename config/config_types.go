@@ -1,15 +1,16 @@
 package config
 
 type Config struct {
-	Order    []string  `mapstructure:"order"`
-	Hostname *Hostname `mapstructure:"hostname"`
-	Uptime   *Uptime   `mapstructure:"uptime"`
-	SysInfo  *SysInfo  `mapstructure:"sysinfo"`
-	Zpool    *Zpool    `mapstructure:"zpool"`
-	Docker   *Docker   `mapstructure:"docker"`
-	Smart    *Smart    `mapstructure:"smart"`
-	Systemd  *Systemd  `mapstructure:"systemd"`
-	Plex     *Plex     `mapstructure:"plex"`
+	Order     []string   `mapstructure:"order"`
+	Hostname  *Hostname  `mapstructure:"hostname"`
+	Uptime    *Uptime    `mapstructure:"uptime"`
+	SysInfo   *SysInfo   `mapstructure:"sysinfo"`
+	Zpool     *Zpool     `mapstructure:"zpool"`
+	DiskSpace *DiskSpace `mapstructure:"diskspace"`
+	Docker    *Docker    `mapstructure:"docker"`
+	Smart     *Smart     `mapstructure:"smart"`
+	Systemd   *Systemd   `mapstructure:"systemd"`
+	Plex      *Plex      `mapstructure:"plex"`
 }
 
 type Hostname struct {
@@ -32,6 +33,11 @@ type SysInfo struct {
 
 type Zpool struct {
 	Disabled bool `mapstructure:"disabled"`
+}
+
+type DiskSpace struct {
+	Disabled   bool     `mapstructure:"disabled"`
+	ExcludedFS []string `mapstructure:"excluded_fs"`
 }
 
 type Docker struct {

@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/jon4hz/gmotd/context"
+	"github.com/jon4hz/gmotd/section/diskspace"
 	"github.com/jon4hz/gmotd/section/docker"
 	"github.com/jon4hz/gmotd/section/hostname"
 	"github.com/jon4hz/gmotd/section/plex"
@@ -33,6 +34,7 @@ var Message = []Section{
 	uptime.Section{},
 	sysinfo.Section{},
 	zpool.Section{},
+	diskspace.Section{},
 	smart.Section{},
 	docker.Section{},
 	systemd.Section{},

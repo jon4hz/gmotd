@@ -11,15 +11,16 @@ type Context struct {
 	context.Context
 	cancel context.CancelFunc
 
-	Config   *config.Config
-	Hostname *Hostname
-	Uptime   *Uptime
-	Sysinfo  *SysInfo
-	Zpool    *Zpool
-	Docker   *Docker
-	Smart    *Smart
-	Systemd  *Systemd
-	Plex     *Plex
+	Config    *config.Config
+	Hostname  *Hostname
+	Uptime    *Uptime
+	Sysinfo   *SysInfo
+	Zpool     *Zpool
+	DiskSpace *DiskSpace
+	Docker    *Docker
+	Smart     *Smart
+	Systemd   *Systemd
+	Plex      *Plex
 }
 
 /* type Runtime struct {
@@ -32,14 +33,15 @@ func New() *Context {
 		Context: c,
 		cancel:  cancel,
 		Config: &config.Config{
-			Hostname: new(config.Hostname),
-			Uptime:   new(config.Uptime),
-			SysInfo:  new(config.SysInfo),
-			Zpool:    new(config.Zpool),
-			Docker:   new(config.Docker),
-			Smart:    new(config.Smart),
-			Systemd:  new(config.Systemd),
-			Plex:     new(config.Plex),
+			Hostname:  new(config.Hostname),
+			Uptime:    new(config.Uptime),
+			SysInfo:   new(config.SysInfo),
+			Zpool:     new(config.Zpool),
+			DiskSpace: new(config.DiskSpace),
+			Docker:    new(config.Docker),
+			Smart:     new(config.Smart),
+			Systemd:   new(config.Systemd),
+			Plex:      new(config.Plex),
 		},
 	}
 }
@@ -83,6 +85,16 @@ type ZpoolPool struct {
 	Capacity  uint64
 	Free      uint64
 	Allocated uint64
+}
+
+type DiskSpace struct {
+	Disks []Disk
+}
+
+type Disk struct {
+	Mountpoint string
+	Total      uint64
+	Used       uint64
 }
 
 type Docker struct {
