@@ -6,7 +6,7 @@ import (
 	"strings"
 
 	"github.com/charmbracelet/lipgloss"
-	"github.com/docker/docker/api/types"
+	"github.com/docker/docker/api/types/container"
 	"github.com/docker/docker/client"
 	"github.com/jon4hz/gmotd/context"
 	"github.com/jon4hz/gmotd/styles"
@@ -21,12 +21,12 @@ func (Section) Enabled(c *context.Context) bool {
 }
 
 func (Section) Gather(c *context.Context) error {
-	cli, err := client.NewClientWithOpts(client.FromEnv)
+	cli, err := client.NewClientWithOpts(client.FromEnv, client.WithAPIVersionNegotiation())
 	if err != nil {
 		return fmt.Errorf("failed to create docker client: %w", err)
 	}
 
-	containers, err := cli.ContainerList(c, types.ContainerListOptions{All: true})
+	containers, err := cli.ContainerList(c, container.ListOptions{All: true})
 	if err != nil {
 		return fmt.Errorf("failed to get docker container list: %w", err)
 	}
