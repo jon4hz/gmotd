@@ -161,7 +161,7 @@ func renderTemp(t uint64, dtype context.DiskType) string {
 
 func renderError(e bool) string {
 	if e {
-		return styles.Red.Render("with errors")
+		return styles.Red.Render("with errors!!!")
 	}
 	return styles.Green.Render("without errors")
 }
