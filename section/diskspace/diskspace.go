@@ -37,7 +37,7 @@ func (Section) Default(ctx *context.Context) {
 }
 
 func (Section) Gather(c *context.Context) error {
-	partitions, err := disk.Partitions(false)
+	partitions, err := disk.PartitionsWithContext(c, false)
 	if err != nil {
 		return err
 	}
@@ -47,7 +47,7 @@ func (Section) Gather(c *context.Context) error {
 		if fsIsExcluded(c.Config.DiskSpace, p.Fstype) {
 			continue
 		}
-		usage, err := disk.Usage(p.Mountpoint)
+		usage, err := disk.UsageWithContext(c, p.Mountpoint)
 		if err != nil {
 			return err
 		}
