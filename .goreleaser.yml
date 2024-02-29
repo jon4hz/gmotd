@@ -1,0 +1,121 @@
+---
+variables:
+  main: "."
+  binary_name: "gmotd"
+  description: "a configurable, dynamic motd generator"
+  github_url: "https://github.com/jon4hz/gmotd"
+  maintainer: "jonah <me@jon4hz.io>"
+  license: "MIT"
+  homepage: "https://jon4hz.io"
+  aur_package: |-
+      # bin
+      install -Dm755 "./gmotd" "${pkgdir}/usr/bin/gmotd"
+      # license
+      install -Dm644 "./LICENSE" "${pkgdir}/usr/share/licenses/gmotd/LICENSE"
+
+before:
+  hooks:
+    - go mod tidy
+
+builds:
+  -
+    id: default
+    env:
+      - CGO_ENABLED=0
+    main: '{{ .Var.main }}'
+    binary: '{{ .Var.binary_name }}'
+    ldflags:
+      - -s
+      - -w
+      - -X github.com/jon4hz/{{ .Var.binary_name }}/internal/version.Version={{ .Version }}
+      - -X github.com/jon4hz/{{ .Var.binary_name }}/internal/version.Commit={{ .Commit }}
+      - -X github.com/jon4hz/{{ .Var.binary_name }}/internal/version.Date={{ .Date }}
+      - -X github.com/jon4hz/{{ .Var.binary_name }}/internal/version.BuiltBy=goreleaser
+    flags:
+      - -trimpath
+    goos:
+      - linux
+    goarch:
+      - amd64
+
+archives:
+  -
+    id: default
+    rlcp: true
+    name_template: "{{ .Var.binary_name }}-v{{ .Version }}-{{ .Os }}-{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}{{ if .Mips }}-{{ .Mips }}{{ end }}"
+    builds:
+      - default
+    files:
+      - LICENSE*
+      - README*
+      - CHANGELOG*
+
+checksum:
+  name_template: 'checksums.txt'
+
+nfpms:
+  -
+    file_name_template: "{{ .Var.binary_name }}-v{{ .Version }}-{{ .Os }}-{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}{{ if .Mips }}-{{ .Mips }}{{ end }}"
+    vendor: jon4hz
+    homepage: '{{ .Var.homepage }}'
+    maintainer: '{{ .Var.maintainer }}'
+    description: '{{ .Var.description }}'
+    license: '{{ .Var.license }}'
+    formats:
+      - apk
+      - deb
+      - rpm
+
+aurs:
+  -
+    name: '{{ .Var.binary_name }}-bin'
+    homepage: '{{ .Var.homepage }}'
+    description: '{{ .Var.description }}'
+    maintainers:
+      - '{{ .Var.maintainer }}'
+    license: '{{ .Var.license }}'
+    private_key: '{{ .Env.AUR_KEY }}'
+    git_url: 'ssh://aur@aur.archlinux.org/{{ .Var.binary_name }}-bin.git'
+    package: '{{ .Var.aur_package }}'
+
+source:
+  rlcp: true
+  enabled: true
+
+snapshot:
+  name_template: "{{ incpatch .Version }}-devel"
+
+changelog:
+  sort: asc
+  use: github
+  filters:
+    exclude:
+      - "^docs:"
+      - "^test:"
+  groups:
+    - title: 'New Features'
+      regexp: "^.*feat[(\\w)]*:+.*$"
+      order: 0
+    - title: 'Bug fixes'
+      regexp: "^.*fix[(\\w)]*:+.*$"
+      order: 10
+    - title: Others
+      order: 999
+
+furies:
+  - account: jon4hz
+
+brews:
+  -
+    name: '{{ .Var.binary_name }}'
+    tap:
+      owner: jon4hz
+      name: homebrew-tap
+      token: "{{ .Env.HOMEBREW_TAP_GITHUB_TOKEN }}"
+    commit_author:
+      name: jon4hz
+      email: me@jon4hz.io
+    homepage: '{{ .Var.homepage }}'
+    description: '{{ .Var.description }}'
+    install: |-
+      bin.install "{{ .Var.binary_name }}"
