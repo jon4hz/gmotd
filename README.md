@@ -56,4 +56,4 @@ First come, first serve.
 ![Preview](.github/assets/preview.png)
 
 ## 🥂 Credits
-- [yboetz/motd](https://github.com/yboetz/motd) (not sure if you'll notice the any similarities tho)
+- [yboetz/motd](https://github.com/yboetz/motd) (not sure if you'll notice any similarities tho)
