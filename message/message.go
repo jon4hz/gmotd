@@ -7,6 +7,7 @@ import (
 	"github.com/jon4hz/gmotd/section/diskspace"
 	"github.com/jon4hz/gmotd/section/docker"
 	"github.com/jon4hz/gmotd/section/hostname"
+	"github.com/jon4hz/gmotd/section/network"
 	"github.com/jon4hz/gmotd/section/plex"
 	"github.com/jon4hz/gmotd/section/smart"
 	"github.com/jon4hz/gmotd/section/sysinfo"
@@ -36,6 +37,7 @@ var Message = []Section{
 	zpool.Section{},
 	diskspace.Section{},
 	smart.Section{},
+	network.Section{},
 	docker.Section{},
 	systemd.Section{},
 	plex.Section{},

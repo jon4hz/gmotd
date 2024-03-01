@@ -7,8 +7,9 @@ type Config struct {
 	SysInfo   *SysInfo   `mapstructure:"sysinfo"`
 	Zpool     *Zpool     `mapstructure:"zpool"`
 	DiskSpace *DiskSpace `mapstructure:"diskspace"`
-	Docker    *Docker    `mapstructure:"docker"`
 	Smart     *Smart     `mapstructure:"smart"`
+	Network   *Network   `mapstructure:"network"`
+	Docker    *Docker    `mapstructure:"docker"`
 	Systemd   *Systemd   `mapstructure:"systemd"`
 	Plex      *Plex      `mapstructure:"plex"`
 }
@@ -61,4 +62,9 @@ type Plex struct {
 	Server    string `mapstructure:"server"`
 	TLSVerify bool   `mapstructure:"tls_verify"`
 	Timeout   int    `mapstructure:"timeout"`
+}
+
+type Network struct {
+	Disabled   bool     `mapstructure:"disabled"`
+	Interfaces []string `mapstructure:"interfaces"`
 }

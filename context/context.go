@@ -21,6 +21,7 @@ type Context struct {
 	Smart     *Smart
 	Systemd   *Systemd
 	Plex      *Plex
+	Network   *Network
 }
 
 /* type Runtime struct {
@@ -38,8 +39,9 @@ func New() *Context {
 			SysInfo:   new(config.SysInfo),
 			Zpool:     new(config.Zpool),
 			DiskSpace: new(config.DiskSpace),
-			Docker:    new(config.Docker),
 			Smart:     new(config.Smart),
+			Network:   new(config.Network),
+			Docker:    new(config.Docker),
 			Systemd:   new(config.Systemd),
 			Plex:      new(config.Plex),
 		},
@@ -137,4 +139,18 @@ type SystemdUnit struct {
 
 type Plex struct {
 	Sessions int
+}
+
+type Network struct {
+	Interfaces []NetworkInterface
+}
+
+type NetworkInterface struct {
+	Name      string
+	BytesSent uint64
+	BytesRecv uint64
+	ErrIn     uint64
+	ErrOut    uint64
+	DropIn    uint64
+	DropOut   uint64
 }
