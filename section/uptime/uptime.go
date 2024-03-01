@@ -19,7 +19,7 @@ func (Section) Enabled(c *context.Context) bool {
 }
 
 func (Section) Default(ctx *context.Context) {
-	viper.SetDefault("uptime.precisioin", 3)
+	viper.SetDefault("uptime.precision", 3)
 }
 
 func (Section) Gather(c *context.Context) error {
