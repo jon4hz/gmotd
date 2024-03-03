@@ -49,7 +49,7 @@ func (Section) Gather(c *context.Context) error {
 				continue
 			}
 			for _, s := range stLog.Entry {
-				if s.Status != 0 {
+				if s.LBA != 0 {
 					hasErr = true
 				}
 			}
