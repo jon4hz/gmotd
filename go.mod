@@ -6,7 +6,7 @@ require (
 	github.com/anatol/smart.go v0.0.0-20230705044831-c3b27137baa3
 	github.com/charmbracelet/bubbles v0.18.0
 	github.com/charmbracelet/lipgloss v0.10.0
-	github.com/charmbracelet/log v0.3.1
+	github.com/charmbracelet/log v0.4.0
 	github.com/coreos/go-systemd/v22 v22.5.0
 	github.com/docker/docker v25.0.4+incompatible
 	github.com/dustin/go-humanize v1.0.1
