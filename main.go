@@ -34,6 +34,7 @@ func main() {
 
 	var (
 		sectionResults = make(map[string]string)
+		mu             sync.Mutex
 		wg             sync.WaitGroup
 		doneC          = make(chan struct{})
 	)
@@ -52,7 +53,9 @@ func main() {
 				}
 
 				if msg := section.Print(ctx); msg != "" {
+					mu.Lock()
 					sectionResults[section.String()] = msg + "\n"
+					mu.Unlock()
 				}
 
 			}(section)
