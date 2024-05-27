@@ -5,7 +5,7 @@ go 1.21
 require (
 	github.com/anatol/smart.go v0.0.0-20230705044831-c3b27137baa3
 	github.com/charmbracelet/bubbles v0.18.0
-	github.com/charmbracelet/lipgloss v0.10.0
+	github.com/charmbracelet/lipgloss v0.11.0
 	github.com/charmbracelet/log v0.4.0
 	github.com/coreos/go-systemd/v22 v22.5.0
 	github.com/docker/docker v26.1.3+incompatible
@@ -26,6 +26,7 @@ require (
 	github.com/aymanbagabas/go-osc52/v2 v2.0.1 // indirect
 	github.com/charmbracelet/bubbletea v0.25.0 // indirect
 	github.com/charmbracelet/harmonica v0.2.0 // indirect
+	github.com/charmbracelet/x/ansi v0.1.1 // indirect
 	github.com/containerd/console v1.0.4-0.20230313162750-1ae8d489ac81 // indirect
 	github.com/containerd/log v0.1.0 // indirect
 	github.com/distribution/reference v0.5.0 // indirect
@@ -43,7 +44,7 @@ require (
 	github.com/krystal/go-runner v0.1.2 // indirect
 	github.com/lufia/plan9stats v0.0.0-20211012122336-39d0f177ccd0 // indirect
 	github.com/magiconair/properties v1.8.7 // indirect
-	github.com/mattn/go-isatty v0.0.18 // indirect
+	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/mattn/go-localereader v0.0.1 // indirect
 	github.com/mattn/go-runewidth v0.0.15 // indirect
 	github.com/mitchellh/mapstructure v1.5.0 // indirect
