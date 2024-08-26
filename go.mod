@@ -5,7 +5,7 @@ go 1.21
 require (
 	github.com/anatol/smart.go v0.0.0-20230705044831-c3b27137baa3
 	github.com/charmbracelet/bubbles v0.18.0
-	github.com/charmbracelet/lipgloss v0.12.1
+	github.com/charmbracelet/lipgloss v0.13.0
 	github.com/charmbracelet/log v0.4.0
 	github.com/coreos/go-systemd/v22 v22.5.0
 	github.com/docker/docker v27.1.2+incompatible
