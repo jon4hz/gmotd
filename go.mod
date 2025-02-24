@@ -14,7 +14,7 @@ require (
 	github.com/krystal/go-zfs v0.1.3
 	github.com/lucasb-eyer/go-colorful v1.2.0
 	github.com/lukesampson/figlet v0.0.0-20190211215653-8a3ef4a6ac42
-	github.com/muesli/termenv v0.15.2
+	github.com/muesli/termenv v0.16.0
 	github.com/shirou/gopsutil/v3 v3.24.5
 	github.com/spf13/viper v1.19.0
 	golang.org/x/exp v0.0.0-20231006140011-7918f672742d
@@ -80,7 +80,7 @@ require (
 	go.uber.org/atomic v1.9.0 // indirect
 	go.uber.org/multierr v1.9.0 // indirect
 	golang.org/x/sync v0.8.0 // indirect
-	golang.org/x/sys v0.24.0 // indirect
+	golang.org/x/sys v0.30.0 // indirect
 	golang.org/x/text v0.14.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 	gotest.tools/v3 v3.5.1 // indirect
