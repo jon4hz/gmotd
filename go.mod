@@ -1,13 +1,14 @@
 module github.com/jon4hz/gmotd
 
-go 1.21
+go 1.22.0
+
 toolchain go1.24.1
 
 require (
 	github.com/anatol/smart.go v0.0.0-20230705044831-c3b27137baa3
 	github.com/charmbracelet/bubbles v0.20.0
 	github.com/charmbracelet/lipgloss v1.1.0
-	github.com/charmbracelet/log v0.4.1
+	github.com/charmbracelet/log v0.4.2
 	github.com/coreos/go-systemd/v22 v22.5.0
 	github.com/docker/docker v28.1.1+incompatible
 	github.com/dustin/go-humanize v1.0.1
