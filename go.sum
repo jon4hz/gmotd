@@ -93,8 +93,8 @@ github.com/krystal/go-runner v0.1.2 h1:3i5rbPDO9lZFtimlNuGOe6zv39/XmqA2TCqEaSfmP
 github.com/krystal/go-runner v0.1.2/go.mod h1:dAaJwjaKdo3FXQnwsbNDSsj8gQYgmwCUmm+oPMHlNjE=
 github.com/krystal/go-zfs v0.1.3 h1:jrF/QRgGTluwkqKczu7bh20RCHwdutsUjf4bdPn7gD8=
 github.com/krystal/go-zfs v0.1.3/go.mod h1:wfalNnsL4SZzXnvxo7jWMjqnCsTvPo9g7jJ8R52fVv4=
-github.com/lucasb-eyer/go-colorful v1.2.0 h1:1nnpGOrhyZZuNyfu1QjKiUICQ74+3FNCN69Aj6K7nkY=
-github.com/lucasb-eyer/go-colorful v1.2.0/go.mod h1:R4dSotOR9KMtayYi1e77YzuveK+i7ruzyGqttikkLy0=
+github.com/lucasb-eyer/go-colorful v1.3.0 h1:2/yBRLdWBZKrf7gB40FoiKfAWYQ0lqNcbuQwVHXptag=
+github.com/lucasb-eyer/go-colorful v1.3.0/go.mod h1:R4dSotOR9KMtayYi1e77YzuveK+i7ruzyGqttikkLy0=
 github.com/lufia/plan9stats v0.0.0-20211012122336-39d0f177ccd0 h1:6E+4a0GO5zZEnZ81pIr0yLvtUWk2if982qA3F3QD6H4=
 github.com/lufia/plan9stats v0.0.0-20211012122336-39d0f177ccd0/go.mod h1:zJYVVT2jmtg6P3p1VtQj7WsuWi/y4VnjVBn7F8KPB3I=
 github.com/lukesampson/figlet v0.0.0-20190211215653-8a3ef4a6ac42 h1:UtyD+eBVdLYSj5/pjfSR6mtnzMgIiOVcFT024G2l4CY=
