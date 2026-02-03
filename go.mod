@@ -9,7 +9,7 @@ require (
 	github.com/charmbracelet/bubbles v0.20.0
 	github.com/charmbracelet/lipgloss v1.1.0
 	github.com/charmbracelet/log v0.4.1
-	github.com/coreos/go-systemd/v22 v22.6.0
+	github.com/coreos/go-systemd/v22 v22.7.0
 	github.com/docker/docker v28.5.1+incompatible
 	github.com/dustin/go-humanize v1.0.1
 	github.com/hako/durafmt v0.0.0-20210608085754-5c1018a4e16b
